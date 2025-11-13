@@ -81,6 +81,17 @@
   margin: 8px 0;
 }
 
+.donor-lastdonation {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 8px 0;
+  background: #f9f9f9;
+  padding: 8px;
+  border-radius: 6px;
+  border-left: 3px solid #ff9999;
+  font-weight: 500;
+}
+
 .request-btn {
   background: #e52d27;
   color: white;

@@ -1,13 +1,15 @@
 // src/pages/Login.js
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
-function Login() {
+function Login({ setIsAuthenticated }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -20,7 +22,8 @@ function Login() {
         password,
       });
       localStorage.setItem("user", JSON.stringify(res.data.user));
-      window.location.href = "/profile";
+      setIsAuthenticated(true);
+      navigate("/");
     } catch (err) {
       setError("❌ Invalid email or password");
       console.error("Login Error:", err);

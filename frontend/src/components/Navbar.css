@@ -17,6 +17,12 @@
   list-style: none;
   display: flex;
   gap: 25px;
+  align-items: center;
+}
+
+.nav-links li {
+  display: flex;
+  align-items: center;
 }
 
 .nav-links a {
@@ -29,4 +35,31 @@
 .nav-links a:hover {
   text-decoration: underline;
   color: #fff8f8;
+}
+
+.logout-btn {
+  background-color: #fff;
+  color: #b30000;
+  border: 2px solid #fff;
+  padding: 8px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  font-family: "Poppins", sans-serif;
+  height: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logout-btn:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.logout-btn:active {
+  transform: scale(0.98);
 }

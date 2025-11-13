@@ -7,7 +7,25 @@ import { useNavigate } from "react-router-dom";
 function Profile() {
   const [user, setUser] = useState(null);
   const [notifications, setNotifications] = useState([]);
+  const [canDonate, setCanDonate] = useState(false);
   const navigate = useNavigate();
+
+  const checkDonationEligibility = (userData) => {
+    // If first-time donor, they can donate
+    if (userData.isFirstTimeDonor === true || userData.isFirstTimeDonor === "true") {
+      return true;
+    }
+
+    // If they have donated before, check if it's been more than 90 days
+    if (userData.lastBloodDonatedDate) {
+      const lastDonatedDate = new Date(userData.lastBloodDonatedDate);
+      const currentDate = new Date();
+      const daysPassed = Math.floor((currentDate - lastDonatedDate) / (1000 * 60 * 60 * 24));
+      return daysPassed >= 90;
+    }
+
+    return false;
+  };
 
   useEffect(() => {
     const loggedUser = JSON.parse(localStorage.getItem("user"));
@@ -16,6 +34,7 @@ function Profile() {
       return;
     }
     setUser(loggedUser);
+    setCanDonate(checkDonationEligibility(loggedUser));
 
     axios
       .get(`http://localhost:5000/api/notifications/${loggedUser.email}`)
@@ -48,6 +67,24 @@ function Profile() {
           <p><strong>City:</strong> {user.city || "Not provided"}</p>
           <p><strong>Blood Group:</strong> {user.bloodGroup || "N/A"}</p>
           <p><strong>Phone:</strong> {user.phone || "Not provided"}</p>
+          <p>
+            <strong>First Time Donor:</strong>{" "}
+            {user.isFirstTimeDonor === true || user.isFirstTimeDonor === "true"
+              ? "Yes ✅"
+              : "No"}
+          </p>
+          {(user.isFirstTimeDonor === false || user.isFirstTimeDonor === "false") && user.lastBloodDonatedDate && (
+            <p>
+              <strong>Last Blood Donated:</strong>{" "}
+              {new Date(user.lastBloodDonatedDate).toLocaleDateString()}
+            </p>
+          )}
+          <p>
+            <strong>Eligible for Blood Request:</strong>{" "}
+            <span className={canDonate ? "eligible" : "not-eligible"}>
+              {canDonate ? "✅ Yes" : "❌ Not yet (need to wait 90 days after last donation)"}
+            </span>
+          </p>
         </div>
 
         <div className="notifications">

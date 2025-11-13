@@ -67,6 +67,16 @@
   color: #333;
 }
 
+.eligible {
+  color: #27ae60;
+  font-weight: 600;
+}
+
+.not-eligible {
+  color: #e74c3c;
+  font-weight: 600;
+}
+
 .notifications {
   margin-top: 25px;
   text-align: left;

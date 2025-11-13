@@ -10,6 +10,8 @@ function Register() {
     bloodGroup: "",
     city: "",
     phone: "",
+    isFirstTimeDonor: true,
+    lastBloodDonatedDate: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -30,6 +32,8 @@ function Register() {
         bloodGroup: "",
         city: "",
         phone: "",
+        isFirstTimeDonor: true,
+        lastBloodDonatedDate: "",
       });
       window.location.href = "/login";
     } catch (error) {
@@ -104,6 +108,47 @@ function Register() {
             onChange={handleChange}
             required
           />
+
+          <div className="donor-type-section">
+            <label>Are you a first-time donor?</label>
+            <div className="radio-group">
+              <label>
+                <input
+                  type="radio"
+                  name="isFirstTimeDonor"
+                  value="true"
+                  checked={formData.isFirstTimeDonor === true || formData.isFirstTimeDonor === "true"}
+                  onChange={(e) =>
+                    setFormData({ ...formData, isFirstTimeDonor: true })
+                  }
+                />
+                Yes, First Time Donor
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="isFirstTimeDonor"
+                  value="false"
+                  checked={formData.isFirstTimeDonor === false || formData.isFirstTimeDonor === "false"}
+                  onChange={(e) =>
+                    setFormData({ ...formData, isFirstTimeDonor: false })
+                  }
+                />
+                No, I have donated before
+              </label>
+            </div>
+          </div>
+
+          {!formData.isFirstTimeDonor && (
+            <input
+              name="lastBloodDonatedDate"
+              type="date"
+              placeholder="Last Blood Donated Date"
+              value={formData.lastBloodDonatedDate}
+              onChange={handleChange}
+              required={!formData.isFirstTimeDonor}
+            />
+          )}
 
           <button type="submit" disabled={loading}>
             {loading ? "Registering..." : "Register"}

@@ -11,7 +11,13 @@ const router = express.Router();
  */
 router.post("/register", async (req, res) => {
   try {
-    const { name, email, password, bloodGroup, city, phone } = req.body;
+    const { name, email, password, bloodGroup, city, phone, isFirstTimeDonor, lastBloodDonatedDate } = req.body;
+
+    console.log("📝 Auth Registration Request Received:");
+    console.log(`  name: ${name}`);
+    console.log(`  email: ${email}`);
+    console.log(`  isFirstTimeDonor: ${isFirstTimeDonor} (type: ${typeof isFirstTimeDonor})`);
+    console.log(`  lastBloodDonatedDate: ${lastBloodDonatedDate}`);
 
     // Validation
     if (!name || !email || !password || !bloodGroup || !city || !phone) {
@@ -29,30 +35,50 @@ router.post("/register", async (req, res) => {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // ✅ Create new user
-    const newUser = new User({
+    // Prepare user data
+    const userData = {
       name,
       email,
       password: hashedPassword,
       bloodGroup,
       city,
       phone,
-    });
+      isFirstTimeDonor: isFirstTimeDonor === true || isFirstTimeDonor === "true" ? true : false,
+    };
+
+    // Only set lastBloodDonatedDate if provided and not a first-time donor
+    if (lastBloodDonatedDate && (isFirstTimeDonor === false || isFirstTimeDonor === "false")) {
+      userData.lastBloodDonatedDate = new Date(lastBloodDonatedDate);
+      console.log(`  ✅ User: Setting lastBloodDonatedDate to: ${userData.lastBloodDonatedDate}`);
+    }
+
+    // ✅ Create new user
+    const newUser = new User(userData);
     await newUser.save();
 
-    // ✅ Create corresponding donor record
-    const newDonor = new Donor({
+    // Prepare donor data (same fields)
+    const donorData = {
       name,
       email,
+      password: hashedPassword,
       bloodGroup,
       city,
       phone,
-      lastDonationDate: new Date(), // default: now
-      available: true,
-    });
+      isFirstTimeDonor: userData.isFirstTimeDonor,
+    };
+
+    if (userData.lastBloodDonatedDate) {
+      donorData.lastBloodDonatedDate = userData.lastBloodDonatedDate;
+      console.log(`  ✅ Donor: Setting lastBloodDonatedDate to: ${donorData.lastBloodDonatedDate}`);
+    }
+
+    // ✅ Create corresponding donor record
+    const newDonor = new Donor(donorData);
     await newDonor.save();
 
     console.log(`✅ New user & donor registered: ${email}`);
+    console.log(`  User: isFirstTimeDonor=${newUser.isFirstTimeDonor}, lastDate=${newUser.lastBloodDonatedDate}`);
+    console.log(`  Donor: isFirstTimeDonor=${newDonor.isFirstTimeDonor}, lastDate=${newDonor.lastBloodDonatedDate}, available=${newDonor.available}`);
 
     res.status(201).json({ message: "🎉 Registration successful!" });
   } catch (error) {
@@ -82,7 +108,22 @@ router.post("/login", async (req, res) => {
     }
 
     console.log(`✅ Login successful for: ${email}`);
-    res.status(200).json({ message: "Login successful", user });
+    
+    // Return all user data including donation info
+    const userData = {
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      bloodGroup: user.bloodGroup,
+      city: user.city,
+      phone: user.phone,
+      isFirstTimeDonor: user.isFirstTimeDonor,
+      lastBloodDonatedDate: user.lastBloodDonatedDate,
+    };
+
+    console.log(`📋 Returning user data:`, userData);
+
+    res.status(200).json({ message: "Login successful", user: userData });
   } catch (error) {
     console.error("❌ Login Error:", error);
     res.status(500).json({ message: "Server error during login" });

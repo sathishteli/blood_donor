@@ -8,6 +8,9 @@ const userSchema = new mongoose.Schema({
   city: { type: String, required: true },
   phone: { type: String, required: true },
   isDonor: { type: Boolean, default: true }, // ✅ mark all registered users as donors
+  isFirstTimeDonor: { type: Boolean, default: true }, // ✅ Track if first-time donor
+  lastBloodDonatedDate: { type: Date, default: null }, // ✅ Store last blood donation date
+  createdAt: { type: Date, default: Date.now },
 });
 
 const User = mongoose.model("User", userSchema);
