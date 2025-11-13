@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Donors.css";
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 const Donors = () => {
   const [donors, setDonors] = useState([]);
   const [search, setSearch] = useState("");
@@ -10,7 +12,7 @@ const Donors = () => {
   // ✅ Fetch donors from backend
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/donors")
+      .get(`${API_URL}/api/donors`)
       .then((res) => {
         console.log("🔍 Donors fetched from backend:", res.data);
         res.data.forEach((donor) => {
@@ -45,7 +47,7 @@ const Donors = () => {
       }
 
       // 📨 Send POST request to create notification
-      await axios.post("http://localhost:5000/api/notifications", {
+      await axios.post(`${API_URL}/api/notifications`, {
         donorEmail: donor.email,
         recipientName,
         recipientCity,

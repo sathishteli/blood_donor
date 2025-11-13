@@ -161,3 +161,79 @@
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .hero {
+    height: auto;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .hero-overlay {
+    padding: 30px 20px;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn-primary, .btn-outline {
+    width: 100%;
+  }
+
+  .how-it-works, .why-donate {
+    padding: 50px 15px;
+  }
+
+  .how-it-works h2, .why-donate h2 {
+    font-size: 1.5rem;
+  }
+
+  .steps {
+    grid-template-columns: 1fr;
+    padding: 0 10px;
+  }
+
+  .reasons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .reason {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero p {
+    font-size: 0.9rem;
+  }
+
+  .btn-primary, .btn-outline {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  .how-it-works h2, .why-donate h2 {
+    font-size: 1.3rem;
+  }
+
+  .card {
+    padding: 20px;
+  }
+}

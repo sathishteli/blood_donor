@@ -119,3 +119,59 @@
   font-style: italic;
   color: #999;
 }
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .donor-page {
+    padding: 30px 4%;
+  }
+
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .search-bar input {
+    width: 90%;
+  }
+
+  .donor-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .donor-card {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .donor-page {
+    padding: 20px 3%;
+  }
+
+  .header h1 {
+    font-size: 1.3rem;
+  }
+
+  .header p {
+    font-size: 0.9rem;
+  }
+
+  .search-bar input {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .donor-card {
+    padding: 12px;
+  }
+
+  .blood {
+    font-size: 1.1rem;
+  }
+
+  .request-btn {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+}

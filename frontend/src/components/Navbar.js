@@ -1,25 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
-const Navbar = ({ onLogout }) => (
-  <nav className="navbar">
-    <div className="logo">❤️ LifeLink</div>
-    <ul className="nav-links">
-      <li><Link to="/">Home</Link></li>
-      <li><Link to="/donors">Find Donors</Link></li>
-      <li><Link to="/notifications">Notifications</Link></li>
-      <li><Link to="/profile">Profile</Link></li>
-      <li>
-        <button 
-          onClick={onLogout}
-          className="logout-btn"
-        >
-          Logout
-        </button>
-      </li>
-    </ul>
-  </nav>
-);
+const Navbar = ({ onLogout }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+  return (
+    <nav className="navbar">
+      <div className="logo">❤️ LifeLink</div>
+      
+      <div className="hamburger" onClick={toggleMenu}>
+        <span className={isMenuOpen ? "bar open" : "bar"}></span>
+        <span className={isMenuOpen ? "bar open" : "bar"}></span>
+        <span className={isMenuOpen ? "bar open" : "bar"}></span>
+      </div>
+
+      <ul className={isMenuOpen ? "nav-links active" : "nav-links"}>
+        <li><Link to="/" onClick={closeMenu}>Home</Link></li>
+        <li><Link to="/donors" onClick={closeMenu}>Find Donors</Link></li>
+        <li><Link to="/notifications" onClick={closeMenu}>Notifications</Link></li>
+        <li><Link to="/profile" onClick={closeMenu}>Profile</Link></li>
+        <li>
+          <button 
+            onClick={() => { closeMenu(); onLogout(); }}
+            className="logout-btn"
+          >
+            Logout
+          </button>
+        </li>
+      </ul>
+    </nav>
+  );
+};
 
 export default Navbar;

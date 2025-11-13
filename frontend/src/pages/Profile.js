@@ -37,7 +37,7 @@ function Profile() {
     setCanDonate(checkDonationEligibility(loggedUser));
 
     axios
-      .get(`http://localhost:5000/api/notifications/${loggedUser.email}`)
+      .get(`${API_URL}/api/notifications/${loggedUser.email}`)
       .then((res) => setNotifications(res.data))
       .catch((err) => console.error("Error fetching notifications:", err));
   }, [navigate]);

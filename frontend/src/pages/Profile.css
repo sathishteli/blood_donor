@@ -111,3 +111,41 @@
     transform: translateY(0);
   }
 }
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .profile-page {
+    padding: 20px;
+  }
+
+  .profile-card {
+    width: 100%;
+    max-width: 420px;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-card {
+    padding: 1.2rem;
+  }
+
+  .avatar {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+
+  .profile-info p {
+    font-size: 0.85rem;
+  }
+
+  .notification-card {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+
+  .logout-btn {
+    width: 100%;
+  }
+}

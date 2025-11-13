@@ -23,7 +23,7 @@ function Register() {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post("http://localhost:5000/api/auth/register", formData); // ✅ use auth route
+      await axios.post(`${API_URL}/api/auth/register`, formData); // ✅ use auth route
       alert("🎉 Registration successful! You can now log in.");
       setFormData({
         name: "",
