@@ -1,0 +1,103 @@
+/* src/pages/Profile.css */
+.profile-page {
+  min-height: 100vh;
+  background: linear-gradient(120deg, #ff7b7b, #b31217);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+}
+
+.profile-card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  width: 420px;
+  text-align: center;
+  animation: fadeIn 0.6s ease;
+}
+
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  background: #e52d27;
+  color: #fff;
+  font-size: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.logout-btn {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background: #e52d27;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout-btn:hover {
+  background: #ff5a54;
+}
+
+.profile-info {
+  text-align: left;
+  margin-top: 20px;
+  background: #fff5f5;
+  padding: 15px;
+  border-radius: 12px;
+}
+
+.profile-info p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.notifications {
+  margin-top: 25px;
+  text-align: left;
+}
+
+.notification-card {
+  background: #ffeaea;
+  border-left: 4px solid #e52d27;
+  padding: 10px 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.note-date {
+  font-size: 0.8rem;
+  color: #777;
+}
+
+.no-notifications {
+  color: #555;
+  text-align: center;
+  padding: 15px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

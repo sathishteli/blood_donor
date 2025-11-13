@@ -1,0 +1,78 @@
+:root{
+  --red1:#ff4d4d;
+  --red2:#b71c1c;
+  --muted:#666;
+  --container:1100px;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background:#fff;
+  color:#222;
+}
+
+.container{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:24px;
+}
+
+/* Navbar */
+.navbar{
+  background: linear-gradient(90deg,var(--red1),var(--red2));
+  color:#fff;
+  padding:14px 0;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.nav-inner{ display:flex; justify-content:space-between; align-items:center; }
+.brand{ display:flex; align-items:center; gap:12px; }
+.logo-img{ width:40px; height:40px; border-radius:8px; background:#fff; padding:6px; object-fit:contain; }
+.brand-text{ font-weight:700; font-size:20px; }
+.nav-links a{ color:#fff; margin-left:18px; text-decoration:none; font-weight:600; }
+.btn-link{ padding:6px 12px; border-radius:8px; background:rgba(255,255,255,0.12); }
+
+/* Hero */
+.hero{
+  height:60vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: linear-gradient(120deg, var(--red1), var(--red2));
+  color:#fff;
+  text-align:center;
+}
+.hero-inner h1{ font-size:44px; margin:0 0 12px; }
+.hero-inner p{ font-size:18px; margin:0 0 20px; }
+.btn{ background:#fff; color:var(--red2); padding:12px 20px; border-radius:8px; border:none; cursor:pointer; font-weight:700; margin-right:10px; }
+.btn.ghost{ background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.25); }
+
+/* Cards grid */
+.cards-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:16px;
+  margin-top:16px;
+}
+
+/* Donor card */
+.card{ background:#fff; border-radius:12px; padding:16px; box-shadow:0 6px 18px rgba(0,0,0,0.06); }
+.donor-card .card-row{ display:flex; gap:12px; align-items:center; }
+.avatar{ width:48px;height:48px;border-radius:24px;background:#ffecec;color:var(--red2);display:flex;align-items:center;justify-content:center;font-weight:800 }
+.donor-name{ margin:0; font-size:16px; font-weight:700; }
+.blood-badge{ background:var(--red2); color:white; padding:8px 10px;border-radius:8px;font-weight:700 }
+
+/* forms */
+.form-box{ max-width:520px;margin:36px auto;padding:20px;border-radius:10px; }
+.form-box input, .form-box textarea{ width:100%; padding:10px; margin:8px 0; border-radius:8px; border:1px solid #eee; }
+.form-box button{ width:100%; padding:12px; border-radius:10px; margin-top:8px; }
+
+/* footer */
+.footer{ background:#f6f6f6; padding:20px 0; text-align:center; margin-top:40px; color:#777; }
+
+/* loader & error */
+.loader{ text-align:center; padding:30px; font-weight:700; }
+.error{ color:crimson; margin-top:10px; }
